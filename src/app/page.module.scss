@@ -1,0 +1,27 @@
+$padding: 3rem;
+$maxHeight: 73vh;
+
+.main {
+  padding: $padding;
+}
+
+.graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: $maxHeight;
+}
+
+.filterArea {
+  border: 5px dotted whitesmoke;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select {
+  font-size: larger;
+  padding: 19px;
+}
