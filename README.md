@@ -1,6 +1,6 @@
 ## NextJs + TypeScript + Lit + PostgreSQL 📊
 
-This NextJs project is designed to visualize data via a combined bar and linear graph based on the data fed by a set of data hosted on a relational db table 
+This NextJs project is designed to visualize data via a combined bar and linear graph based on the data fed by a set of data hosted on a relational db table
 
 ## TechStack:
 
@@ -34,11 +34,14 @@ npm run dev
 
 4.  **Access the application in your web browser at `http://localhost:3000`.**
 
-
 ## 🪙 Credits:
 
 - Made possible using [ChartJS](https://www.npmjs.com/package/chart.js?activeTab=readme) and [React-Chart-JS-2](https://www.npmjs.com/package/react-chartjs-2)
 
+## TO-DO:
+
+- Add Spnner/Loader when graph is being updated for slow connections
+- Integrate middleware i.e Nginx
 
 ## 📕 Learn More
 
