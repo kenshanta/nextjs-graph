@@ -1,8 +1,10 @@
 $padding: 3rem;
 $maxHeight: 73vh;
+$universalFont: "Protest";
 
 .main {
   padding: $padding;
+  font-family: $universalFont;
 }
 
 .graph {
@@ -24,4 +26,50 @@ $maxHeight: 73vh;
 .select {
   font-size: larger;
   padding: 19px;
+}
+
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: $maxHeight;
+
+  svg text {
+    font-family: "Protest";
+    text-transform: uppercase;
+    animation: stroke 2s forwards alternate;
+    stroke-width: 90px;
+    stroke: green;
+    font-size: 3.5rem;
+  }
+
+  @keyframes stroke {
+    0% {
+      fill: rgba(72, 138, 20, 0);
+      stroke: green;
+      stroke-dashoffset: 55%;
+      stroke-dasharray: 5% 35%;
+      stroke-width: 2;
+    }
+
+    90% {
+      fill: rgba(72, 138, 20, 0);
+      stroke: rgb(84, 84, 84);
+    }
+
+    95% {
+      fill: rgba(72, 138, 20, 0);
+      stroke: rgb(41, 41, 41);
+      stroke-width: 3;
+    }
+
+    100% {
+      fill: rgb(46, 46, 46);
+      stroke: rgba(54, 95, 160, 0);
+      stroke-dashoffset: -5%;
+      stroke-dasharray: 50% 0;
+      stroke-width: 2;
+    }
+  }
 }

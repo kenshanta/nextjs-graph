@@ -1,6 +1,8 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import styles from "./page.module.scss";
+import loadingSvg from "../../public/loading.svg";
 import { Bar } from "react-chartjs-2";
 import {
   CategoryScale,
@@ -27,7 +29,6 @@ export default function Home() {
     labels: ["shop_click", "interaction", "start"],
     datasets: [{ label: "initialLabel", data: new Array(0) }],
   });
-
   const filterOptions: FilterOption[] = useMemo(
     () => [
       { label: "All", value: "" },
@@ -36,9 +37,8 @@ export default function Home() {
     ],
     []
   );
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>(filterOptions[0].value);
-
   const options = useMemo(
     () => ({
       elements: {
@@ -55,6 +55,7 @@ export default function Home() {
           text: `${filter ? filter.toUpperCase() : "All"} Graph Logs`,
           font: {
             size: 33,
+            family: "Protest",
           },
         },
       },
@@ -64,6 +65,7 @@ export default function Home() {
   );
 
   const fetchData = useCallback(async (filterValue: string = "") => {
+    setIsLoading(true);
     try {
       const res = await fetch(`api/data?filter=${filterValue}`);
       if (!res.ok) {
@@ -75,6 +77,8 @@ export default function Home() {
       setChartData(filteredData);
     } catch (error) {
       console.error("Fetch data error:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -114,12 +118,23 @@ export default function Home() {
     <main className={styles.main}>
       <div>
         <filter-option-area></filter-option-area>
-        {chartData ? (
-          <div className={styles.graph}>
-            <Bar options={options} data={chartData} />
+        {isLoading ? (
+          <div className={styles.loader}>
+            <svg height={100} viewBox="0 0 400 100">
+              <text
+                x="50%"
+                y="50%"
+                dominantBaseline="middle"
+                textAnchor="middle"
+              >
+                Loading...
+              </text>
+            </svg>
           </div>
         ) : (
-          <div className={styles.graph}>Loading...</div>
+          <div className={styles.graph}>
+            <Bar options={options} data={chartData!} />
+          </div>
         )}
         <flex-box></flex-box>
       </div>
