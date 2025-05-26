@@ -4,14 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import styles from "./page.module.scss";
 import loadingSvg from "../../public/loading.svg";
 import { Bar } from "react-chartjs-2";
-import {
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import Chart from "chart.js/auto";
 import nameCount from "@/utils/nameCount";
 import "@/components/filterOptionArea";
@@ -91,25 +84,20 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const filterOptionArea = document.querySelector(
-      "filter-option-area"
-    ) as HTMLElement & { options: FilterOption[]; selectedValue: string };
+    const filterOptionArea = document.querySelector("filter-option-area") as HTMLElement & {
+      options: FilterOption[];
+      selectedValue: string;
+    };
 
     if (filterOptionArea) {
       filterOptionArea.options = filterOptions;
       filterOptionArea.selectedValue = filter;
-      filterOptionArea.addEventListener(
-        "selection-changed",
-        handleSelectionChange
-      );
+      filterOptionArea.addEventListener("selection-changed", handleSelectionChange);
     }
 
     return () => {
       if (filterOptionArea) {
-        filterOptionArea.removeEventListener(
-          "selection-changed",
-          handleSelectionChange
-        );
+        filterOptionArea.removeEventListener("selection-changed", handleSelectionChange);
       }
     };
   }, [filter, filterOptions, handleSelectionChange]);
@@ -121,12 +109,7 @@ export default function Home() {
         {isLoading ? (
           <div className={styles.loader}>
             <svg height={100} viewBox="0 0 400 100">
-              <text
-                x="50%"
-                y="50%"
-                dominantBaseline="middle"
-                textAnchor="middle"
-              >
+              <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
                 Loading...
               </text>
             </svg>
@@ -136,7 +119,6 @@ export default function Home() {
             <Bar options={options} data={chartData!} />
           </div>
         )}
-        <flex-box></flex-box>
       </div>
     </main>
   );

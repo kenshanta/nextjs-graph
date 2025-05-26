@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import styles from "../app/page.module.scss";
+
 interface Option {
   label: string;
   value: string;
@@ -16,12 +16,19 @@ export class FilterOptionArea extends LitElement {
 
   static styles = css`
     .box {
-      border: 5px dotted #ddd;
       padding: 10px;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+    }
+    .hero {
+      font-size: 24px;
+      text-align: center;
+
+      padding: 10px;
+      border: 5px solid #ddd;
+      border-radius: 13px;
     }
 
     select {
@@ -44,14 +51,13 @@ export class FilterOptionArea extends LitElement {
 
   render() {
     return html`
+      <div class="hero">Visualize Data with Next.js</div>
       <div class="box">
+        <p>Select Filter: &nbsp;</p>
         <select @change="${this.handleSelectChange}">
           ${this.options.map(
             (option) => html`
-              <option
-                value=${option.value}
-                ?selected=${this.selectedValue === option.value}
-              >
+              <option value=${option.value} ?selected=${this.selectedValue === option.value}>
                 ${option.label}
               </option>
             `
